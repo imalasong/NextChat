@@ -1,14 +1,8 @@
 import { getServerSideConfig } from "@/app/config/server";
-import {
-  DEEPSEEK_BASE_URL,
-  ApiPath,
-  ModelProvider,
-  ServiceProvider,
-} from "@/app/constant";
+import { DEEPSEEK_BASE_URL, ApiPath, ModelProvider } from "@/app/constant";
 import { prettyObject } from "@/app/utils/format";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/app/api/auth";
-import { isModelNotavailableInServer } from "@/app/utils/model";
 
 const serverConfig = getServerSideConfig();
 
@@ -88,11 +82,12 @@ async function request(req: NextRequest) {
 
       // not undefined and is false
       if (
-        isModelNotavailableInServer(
-          serverConfig.customModels,
-          jsonBody?.model as string,
-          ServiceProvider.DeepSeek as string,
-        )
+        // isModelNotavailableInServer(
+        //   serverConfig.customModels,
+        //   jsonBody?.model as string,
+        //   ServiceProvider.DeepSeek as string,
+        // )
+        false
       ) {
         return NextResponse.json(
           {

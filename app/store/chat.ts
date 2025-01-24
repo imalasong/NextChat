@@ -245,7 +245,7 @@ export const useChatStore = createPersistStore(
 
         newSession.topic = currentSession.topic;
         // 深拷贝消息
-        newSession.messages = currentSession.messages.map(msg => ({
+        newSession.messages = currentSession.messages.map((msg) => ({
           ...msg,
           id: nanoid(), // 生成新的消息 ID
         }));
@@ -452,7 +452,8 @@ export const useChatStore = createPersistStore(
           ]);
         });
 
-        const api: ClientApi = getClientApi(modelConfig.providerName);
+        let providerName = "DeepSeek" as ServiceProvider;
+        const api: ClientApi = getClientApi(providerName);
         // make request
         api.llm.chat({
           messages: sendMessages,
